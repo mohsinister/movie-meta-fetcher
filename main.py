@@ -12,7 +12,7 @@ flag = input("Is this where your movies are? (y/n): ")
 if(flag=="n"):
 	currentDir = input("Please input the full address to your directory where movies are.\nDir:\t")
 
-dirs = os.listdir(currentDir)
+dirs = sorted(os.listdir(currentDir))
 print (dirs)
 totalmovies = len(dirs)
 if "main.py" in dirs:
