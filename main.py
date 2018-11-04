@@ -115,6 +115,7 @@ for filename in dirs:
             else:
                 finaljson = ''.join([finaljson, jsonpart])
 
+finaljson = finaljson.rstrip(", \n")
 finaljson = ''.join([finaljson, "\n\t\t]\n}"])
 fh = open("content.txt", "w")
 fh.write(finaljson)
