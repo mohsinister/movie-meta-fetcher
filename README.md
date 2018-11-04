@@ -1,5 +1,5 @@
 # Ported for python 3
-For python 2 [USE THIS ONE] (https://github.com/mohsinister/movie-meta-fetch/tree/Mohsin)
+For python 2 [USE THIS ONE](https://github.com/mohsinister/movie-meta-fetch/tree/Mohsin)
 
 # Movie Metadata fetch
 Fetch metadata of your movies easily with this script and save them in a html file to view/search for movies according to genre, actors, imdb rating. 
@@ -26,4 +26,4 @@ Eg. of dummy folder
 *   Actors
 
 ### Technical Details
-Gets all the meta data from [OMDB API](www.omdbapi.com)
+Gets all the meta data from [OMDB API](http://www.omdbapi.com/)
