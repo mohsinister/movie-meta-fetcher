@@ -3,9 +3,9 @@ import requests
 import json
 import re
 
-apiKey = 'XXXX'
+omdbapiKey = 'XXXXX'
+tmdbKey = 'XXXXXXXXXXXXXX'
 finaljson = ''
-api_key= 'XXXX'
 def dataSetter(json1):
     movieTitle = moviename
     movieYear = ''
@@ -47,9 +47,7 @@ def dataSetter(json1):
     if counter != totalmovies:
         global finaljson
         finaljson = ''.join([finaljson, jsonpart, " , \n"])
-                # put coma
     else:
-        #global finaljson
         finaljson = ''.join([finaljson, jsonpart])
     return finaljson
 currentDir = os.getcwd()
@@ -104,29 +102,29 @@ for filename in dirs:
             moviename = filename[0:filename.find(years[0])]
             moviename = moviename.replace("."," ")
             moviename = moviename.rstrip()
-            url = 'http://www.omdbapi.com/?apikey={0}&t={1}&y={2}'.format(apiKey,moviename, years[0])
+            url = 'http://www.omdbapi.com/?apikey={0}&t={1}&y={2}'.format(omdbapiKey,moviename, years[0])
         else:
             moviename = filename.replace("."," ")
             moviename = moviename.rstrip()
-            url = 'http://www.omdbapi.com/?apikey={0}&t={1}'.format(apiKey,moviename)
+            url = 'http://www.omdbapi.com/?apikey={0}&t={1}'.format(omdbapiKey,moviename)
         counter = counter + 1
         fetchedDetails = requests.get(url)
         details = fetchedDetails.content
         json1 = json.loads(details)
         if json1['Response'] == "False":
-            url = 'https://api.themoviedb.org/3/search/movie?query={0}&api_key={1}'.format(moviename,api_key)
+            url = 'https://api.themoviedb.org/3/search/movie?query={0}&api_key={1}'.format(moviename,tmdbKey )
             fetchedDetails = requests.get(url)
             details = fetchedDetails.content
             json2 = json.loads(details)
             if json2['total_results'] > 0:
-                tmdb = json2['results'][0]['id']
-                url = 'https://api.themoviedb.org/3/movie/{0}?&api_key={1}'.format(tmdb,api_key)
+                tmdbID = json2['results'][0]['id']
+                url = 'https://api.themoviedb.org/3/movie/{0}?&api_key={1}'.format(tmdbID,tmdbKey )
                 fetchedDetails = requests.get(url)
                 details = fetchedDetails.content
                 json2 = json.loads(details)
-                imdb = json2['imdb_id']
-                if imdb != "":
-                    url = 'http://www.omdbapi.com/?apikey={0}&i={1}'.format(apiKey,imdb)
+                imdbID = json2['imdb_id']
+                if imdbID != "":
+                    url = 'http://www.omdbapi.com/?apikey={0}&i={1}'.format(omdbapiKey,imdbID)
                     fetchedDetails = requests.get(url)
                     details = fetchedDetails.content
                     json2 = json.loads(details)
