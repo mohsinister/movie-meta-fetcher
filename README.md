@@ -9,8 +9,10 @@ Fetch metadata of your movies easily with this script and save them in a html fi
 * Sign Up on omdabpi.com and get apikey.
 * Replace XXXX with the api key in line 6 in main.py where omdbapiKey = 'XXXX'
 * Sign up on themoviedb.org and get apikey.
-* Replace XXXXXXXX woth the api key in line 7 in main.py where tmdbKey = 'XXXXXXXXXXX'
+* Replace XXXXXXXX with the api key in line 7 in main.py where tmdbKey = 'XXXXXXXXXXX'
 * Run the python file, feed in the directory where all your movies are listed and kaboom! You will get a txt file with json data of all details related to the movie. Upload the *content.txt* and *index.html* in the same folder to view your movie metadata online. For the movie folders/files it coulnd't process it will add the details to the ERRORLOG file.
+* Replace ZZZZ with your trak.tv username, for traktv api key go to https://trakt.tv/oauth/applications and create an application. It is not rocket science.
+* Next go to https://trakt.docs.apiary.io read the documentation on how to use the api. In this version, I am only using GET requests so authorization is not necessary.
 
 ### How does it work?
 This script will work for almost everyone, I made it for my personal use and I have a habit of keeping my folders tidy. Generally all the movie files/folder are saved in this format *MOVIE NAME [YEAR] (1080p) (YTS.AM)*, or *MOVIE.NAME.Year.1080p.YTS.AM.mp4/mkv*, or *Movie.Name* would do.
@@ -18,14 +20,15 @@ Eg. of dummy folder
 [Screenshot of Dummy Movie Folder](http://i.imgur.com/6NcRoiQ.png)
 
 ### What details will it fetch?
-*   Name
+*   Name (with trailer from youtube)
 *   Year
 *   Time (mins)
-*   Rating
+*   IMDB Rating
 *   Metascore
 *   Plot
 *   Genre
 *   Actors
+*   Watched (or not)
 
 ### Technical Details
 Gets all the meta data from [OMDB API](http://www.omdbapi.com/)
