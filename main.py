@@ -3,16 +3,24 @@ import os
 import requests
 import json
 import re
+import unicodedata
 from youtube_search import YoutubeSearch
 from pathlib import Path
 
 omdbapiKey = 'XXXX'
 tmdbKey = 'XXXX'
-trakTvKey = 'YYYY'
-trakTvUser = 'ZZZZ'
+trakTvKey = 'XXXX'
+trakTvUser = 'XXXX'
 finaljson = ''
+headers = {'trakt-api-version': '2','trakt-api-key': trakTvKey}
+def simplify(text):
+    try:
+        text = unicode(text, 'utf-8')
+    except NameError:
+        pass
+    text = unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode("utf-8")
+    return str(text)
 def dataSetter(json1):
-    headers = {'trakt-api-version': '2','trakt-api-key': trakTvKey}
     movieTitle = "<a href='"+trailer+"' target='_blank'>"+moviename+"</a>"
     movieYear = ''
     movieRuntime = ''
@@ -78,10 +86,10 @@ if my_file.is_file():
 print ("Your current directory is : ")
 print (currentDir)
 
-#flag = input("Is this where your movies are? (y/n): ")
+flag = input("Is this where your movies are? (y/n): ")
 
-#if(flag=="n"):
-#    currentDir = input("Please input the full address to your directory where movies are.\nDir:\t")
+if(flag=="n"):
+    currentDir = input("Please input the full address to your directory where movies are.\nDir:\t")
 
 dirs = sorted(os.listdir(currentDir))
 print (dirs)
@@ -152,7 +160,16 @@ for filename in dirs:
             strP = strTest[1].split(']',1)
             strQ = strTest[0][strO:]+'>'+moviename+strP[0][0:]
             print (moviename+ ' was found in local file.')
-            #print(strQ)
+            if strQ.rfind('No')>0:
+                strImdbID= strQ.find("/title/")
+                strImbdID = strQ.split("/title/",1)
+                strImbdID = (strImbdID[1].split("'",1)[0])
+                url = 'https://api.trakt.tv/users/{0}/history/movies/{1}'.format(trakTvUser,strImbdID)
+                fetchedDetails = requests.get(url,headers=headers)
+                details = fetchedDetails.content
+                jsonTrakTv = json.loads(details)
+                if len(jsonTrakTv)>0:
+                    strQ = strQ[::-1].replace("No"[::-1], "Yes"[::-1], 1)[::-1]
             #strName = '\t\t\t["{0}","{1}]'.format(counter,strO:oldjson.find("]",oldjson.find(moviename))])
             jsonpart = '\t\t\t["{0}","{1}]'.format(counter,strQ)
             finaljson = ''.join([finaljson, jsonpart, " , \n"])
@@ -217,8 +234,9 @@ for filename in dirs:
                 finaljson = dataSetter(json1)
 finaljson = finaljson.rstrip(", \n")
 finaljson = ''.join([finaljson, "\n\t\t]\n}"])
+jsonNormalized = simplify(finaljson)
 fh = open("content.json", "w", encoding='utf-8')
-fh.write(finaljson)
+fh.write(jsonNormalized)
 fh.close()
 errorfile.close()
 print("****************")
