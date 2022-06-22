@@ -13,7 +13,7 @@ Fetch metadata of your movies easily with this script and save them in a html fi
 * Replace XXXX with your trak.tv username where trakTvUser = 'XXXX'
 * For traktv api key go to [APP](https://trakt.tv/oauth/applications) and create an application. It is not rocket science.
 * Replace XXXX where trakTvKey = 'XXXX'
-* Next go to [Trakt API](https://trakt.docs.apiary.io) read the documentation on how to use the api. In this version, I am only using GET requests so authorization is not necessary.
+* Install [Torrent Parser](https://github.com/divijbindlish/parse-torrent-name) to help with fetching movie title from a messy folder.
 * Run the python file, feed in the directory where all your movies are listed and kaboom! You will get a txt file with json data of all details related to the movie. Upload the *content.txt* and *index.html* in the same folder to view your movie metadata online. For the movie folders/files it coulnd't process it will add the details to the ERRORLOG file.
 * Run localhost server through python/tomcat/xampp etc to open the html, don't open directly as browsers don't allow this anymore.
 
@@ -23,6 +23,7 @@ Eg. of dummy folder
 [Screenshot of Dummy Movie Folder](http://i.imgur.com/6NcRoiQ.png)
 
 To keep track of the movies you have watched, you can either manually mark them on Trakt or use this [3rd Party Service](https://www.thenerdystudent.com/2020/05/vlc-trakt-scrobble/) to automatically mark it as watched on Trakt.
+
 
 ### What details will it fetch?
 *   Name (with trailer from youtube)
@@ -35,6 +36,7 @@ To keep track of the movies you have watched, you can either manually mark them 
 *   Actors
 *   Watched Status (from Trakt)
 
+[DEMO](https://mohsinister.github.io/movies/)
 ### Technical Details
 Gets all the meta data from [OMDB API](http://www.omdbapi.com/)
 
