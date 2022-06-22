@@ -24,7 +24,7 @@ Eg. of dummy folder
 
 To keep track of the movies you have watched, you can either manually mark them on Trakt or use this [3rd Party Service](https://www.thenerdystudent.com/2020/05/vlc-trakt-scrobble/) to automatically mark it as watched on Trakt.
 
-[DEMO](https://mohsinister.github.io/movies/)
+
 ### What details will it fetch?
 *   Name (with trailer from youtube)
 *   Year
@@ -35,7 +35,7 @@ To keep track of the movies you have watched, you can either manually mark them 
 *   Genre
 *   Actors
 *   Watched Status (from Trakt)
-
+[DEMO](https://mohsinister.github.io/movies/)
 ### Technical Details
 Gets all the meta data from [OMDB API](http://www.omdbapi.com/)
 
