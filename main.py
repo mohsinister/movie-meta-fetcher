@@ -69,9 +69,17 @@ def dataSetter(oldjson,json1,trailer,moviename):
         details = fetchedDetails.content
         jsonTrakTv = json.loads(details)
         if len(jsonTrakTv)>0:
-            movieWatched = 'Yes'
+            movieWatched = jsonTrakTv[0]["movie"]['ids']['slug']
+            movieWatched = "<a href='https://trakt.tv/movies/"+movieWatched+"' target='_blank'>Yes</a>"
         else:
             movieWatched = 'No'
+            url = 'https://api.trakt.tv/search/imdb/{0}'.format(imdbID)
+            fetchedDetails = requests.get(url,headers=headers)
+            details = fetchedDetails.content
+            jsonTrakTv = json.loads(details)
+            if len(jsonTrakTv)>0:
+                movieWatched = jsonTrakTv[0]["movie"]['ids']['slug']
+                movieWatched = "<a href='https://trakt.tv/movies/"+movieWatched+"' target='_blank'>No</a>"
         imdbID = "https://www.imdb.com/title/"+imdbID
         movieImdb = str(movieImdb).replace('"','\\"')
         movieImdb = "<a href='"+imdbID+"' target='_blank'>"+movieImdb+"</a>"
