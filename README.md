@@ -35,6 +35,7 @@ To keep track of the movies you have watched, you can either manually mark them 
 *   Genre
 *   Actors
 *   Watched Status (from Trakt)
+
 [DEMO](https://mohsinister.github.io/movies/)
 ### Technical Details
 Gets all the meta data from [OMDB API](http://www.omdbapi.com/)
