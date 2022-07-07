@@ -39,8 +39,8 @@ To keep track of the movies you have watched, you can either manually mark them 
 
 [DEMO](https://mohsinister.github.io/movies/)
 ### Technical Details
-Gets all the meta data from [OMDB API](http://www.omdbapi.com/)
-Gets watch status from [TRAKT API](https://trakt.tv/)
+*   Gets all the meta data from [OMDB API](http://www.omdbapi.com/)
+*   Gets watch status from [TRAKT API](https://trakt.tv/)
 
 ### ToDo
 *   Someone make the Html pretty.
